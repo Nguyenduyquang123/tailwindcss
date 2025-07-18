@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'SF Pro Display ';
+  src: url('./fonts/SF-Pro-Display-Regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'SF Pro Display ';
+  src: url('./fonts/SF-Pro-Display-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@layer utilities {
+  .max-w-md {
+    max-width: 1182px;
+    margin: 0 auto;
+  }
+   .max-w-sm{
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .text-primary {
+    color: #DE0200;
+  }
+  .bg-primary{
+    background-color: #DE0200;
+  }
+
+  .border-primary{
+    border-color: #979797;
+  }
+
+}
+
+body{
+    font-family: 'SF Pro Display', sans-serif;
+    
+}

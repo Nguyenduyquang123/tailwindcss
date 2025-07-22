@@ -65,7 +65,6 @@
 
 
 
-// chi tiết
 
 
 $(document).ready(function(){
@@ -275,3 +274,116 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+
+  const btn_right_list = document.querySelectorAll('.quantity__btn--right');
+  const btn_left_list = document.querySelectorAll('.quantity__btn--left');
+  
+          function formatPrice(value) {
+              return value.toLocaleString('vi-VN');
+          }
+  
+          btn_right_list.forEach(btn => {
+              btn.addEventListener('click', () => {
+                  const parent = btn.closest('.shopping-cart__list');
+                  const input = parent.querySelector('.quantity__input');
+                  const priceElement = parent.querySelector('.shopping-cart__list--price');
+  
+                  let value = parseInt(input.value);
+                  value++;
+                  input.value = value;
+  
+                  const unitPrice = parseInt(priceElement.getAttribute('data-price'));
+                  const totalPrice = unitPrice * value;
+  
+                  priceElement.innerHTML = `${formatPrice(totalPrice)} <span>đ</span>`;
+                  updateTotalCart();
+              });
+          });
+  
+          btn_left_list.forEach(btn => {
+              btn.addEventListener('click', () => {
+                  const parent = btn.closest('.shopping-cart__list');
+                  const input = parent.querySelector('.quantity__input');
+                  const priceElement = parent.querySelector('.shopping-cart__list--price');
+  
+                  let value = parseInt(input.value);
+                  value = value > 0 ? value - 1 : 0;
+                  input.value = value;
+  
+                  const unitPrice = parseInt(priceElement.getAttribute('data-price'));
+                  const totalPrice = unitPrice * value;
+  
+                  priceElement.innerHTML = `${formatPrice(totalPrice)} <span>đ</span>`;
+                  updateTotalCart();
+              });
+          });
+             const priceList = document.querySelectorAll('.shopping-cart__list--price');
+              let total = 0;
+  
+              priceList.forEach(priceElement => {
+                  const priceText = priceElement.textContent.replace(/[^\d]/g, '');
+                  const price = parseInt(priceText);
+                  total += price;
+              }); 
+  
+              const totalElement = document.querySelector('.provisional-cart__total--price');
+              const tprice=document.querySelector('.provisional-cart__title--price');
+              totalElement.textContent = `${formatPrice(total)} đ`;
+              tprice.textContent = `${formatPrice(total)} đ`;
+          function updateTotalCart() {
+              const priceList = document.querySelectorAll('.shopping-cart__list--price');
+              let total = 0;
+  
+              priceList.forEach(priceElement => {
+                  const priceText = priceElement.textContent.replace(/[^\d]/g, '');
+                  const price = parseInt(priceText);
+                  total += price;
+              });
+  
+              const totalElement = document.querySelector('.provisional-cart__total--price');
+              const tprice=document.querySelector('.provisional-cart__title--price');
+              totalElement.textContent = `${formatPrice(total)} đ`;
+              tprice.textContent = `${formatPrice(total)} đ`;
+          }
+             document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+
+            deleteButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    deleteParent(this);
+                });
+            });
+        });
+
+
+        
+        });
+
+  function deleteParent(btn) {
+    const cartItem = btn.closest('.shopping-cart__list');
+    if (!cartItem) return;
+
+    cartItem.remove();
+
+    let newTotal = 0;
+    document.querySelectorAll('.shopping-cart__list').forEach(item => {
+      const quantity = parseInt(item.querySelector('.quantity__input')?.value || '1');
+      const unitPrice = parseInt(item.querySelector('.shopping-cart__list--price')?.getAttribute('data-price') || '0');
+      newTotal += quantity * unitPrice;
+    });
+
+    const totalElement = document.querySelector('.provisional-cart__total--price');
+    const tpriceElement = document.querySelector('.provisional-cart__title--price');
+
+    totalElement.textContent = `${formatPrice(newTotal)} đ`;
+    tpriceElement.textContent = `${formatPrice(newTotal)} đ`;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.delete-button').forEach(btn => {
+      btn.addEventListener('click', function () {
+        deleteParent(this);
+      });
+    });
+  });

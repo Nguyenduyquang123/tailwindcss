@@ -387,3 +387,31 @@ $(document).ready(function () {
       });
     });
   });
+
+
+  // nav mobile
+
+ document.addEventListener('DOMContentLoaded', function () {
+    const navMobile = document.getElementById('nav_mobile');
+    const menuMobile = document.getElementById('menu_mobile');
+    const exitMobile = document.getElementById('exit_mobile');
+    const overlayMobile = document.getElementById('overlay_mobile');
+
+    // Mở menu khi bấm nút menu
+    navMobile.addEventListener('click', function () {
+      menuMobile.classList.remove('hidden');
+      overlayMobile.classList.remove('hidden');
+    });
+
+    // Đóng menu khi bấm dấu X
+    exitMobile.addEventListener('click', function () {
+      menuMobile.classList.add('hidden');
+      overlayMobile.classList.add('hidden');
+    });
+
+    // Đóng menu khi bấm vào vùng overlay mờ
+    overlayMobile.addEventListener('click', function () {
+      menuMobile.classList.add('hidden');
+      overlayMobile.classList.add('hidden');
+    });
+  });
